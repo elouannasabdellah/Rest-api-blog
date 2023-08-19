@@ -3,6 +3,9 @@ const express= require('express');
 
 const connectToDb= require('./config/connectToDb');
 
+const { errorHandler } = require('./middelwares/error')
+const { NotFount} = require('./middelwares/error')
+
 require('dotenv').config() ;
 
 connectToDb();
@@ -23,7 +26,11 @@ app.use("/api/comments", require('./routes/commentsRoute'));
 app.use("/api/categories", require('./routes/categoriesRoute'));
 
 
+// 
+app.use(NotFount);
 
+// Error Handler Middelware 
+app.use(errorHandler)
 
 //Ranning The server
 
